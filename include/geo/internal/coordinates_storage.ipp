@@ -17,7 +17,7 @@ namespace geo
         inline constexpr
         bool is_power_of_two(unsigned n) noexcept
         {
-            return n && !(n & n - 1);
+            return n && !(n & (n - 1));
         }
     }
 
