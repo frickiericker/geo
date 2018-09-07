@@ -26,6 +26,8 @@ int main()
 [travis-badge]: https://travis-ci.org/snsinfu/geo.svg?branch=master
 [travis-url]: https://travis-ci.org/snsinfu/geo
 
+---
+
 - [Installation](#installation)
 - [Testing](#testing)
 - [License](#license)
