@@ -2,6 +2,7 @@ MAIN = run_test
 
 OBJECTS = \
   main.o \
+  basic_coords_test.o \
   vector_test.o \
   point_test.o \
   neighbor_searcher_test.o
