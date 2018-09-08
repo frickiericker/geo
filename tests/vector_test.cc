@@ -208,3 +208,27 @@ TEST_CASE("vector - normalize returns the normalized vector")
     CHECK(norm[0] == Approx(0.6));
     CHECK(norm[1] == Approx(-0.8));
 }
+
+TEST_CASE("vector - implements ostream output operator")
+{
+    geo::vector<double, 4> const vec1 = {1, 2, 3, 4};
+    geo::vector<double, 3> const vec2 = {5, 6, 7};
+    std::stringstream stream;
+    stream << vec1 << '\n' << vec2;
+    CHECK(stream.str() == "1 2 3 4\n5 6 7");
+}
+
+TEST_CASE("vector - implements istream input operator")
+{
+    geo::vector<double, 4> vec1;
+    geo::vector<double, 3> vec2;
+    std::stringstream stream{"1 2 3 4\n5 6 7"};
+    stream >> vec1 >> vec2;
+    CHECK(vec1[0] == 1);
+    CHECK(vec1[1] == 2);
+    CHECK(vec1[2] == 3);
+    CHECK(vec1[3] == 4);
+    CHECK(vec2[0] == 5);
+    CHECK(vec2[1] == 6);
+    CHECK(vec2[2] == 7);
+}
