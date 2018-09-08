@@ -12,6 +12,7 @@
 #include <istream>
 #include <iterator>
 #include <ostream>
+#include <utility>
 
 
 namespace geo
@@ -178,7 +179,7 @@ namespace geo
         basic_coords<T, N>& coords
     )
     {
-        using sentry_type = typename std::basic_ostream<Char, Tr>::sentry;
+        using sentry_type = typename std::basic_istream<Char, Tr>::sentry;
 
         if (sentry_type sentry{is}) {
             for (index i = 0; i < N; ++i) {
@@ -503,12 +504,17 @@ namespace geo
 
     namespace detail
     {
+        using std::begin;
+
+        template<typename Range>
+        using iterator_type_t = decltype(begin(std::declval<Range>()));
+
         // element_point is a SFINAE-friendly metafunction to extract the value
         // type of a range assuming it is an instantiation of the point class
         // template.
         template<
             typename Range,
-            typename = typename std::iterator_traits<typename Range::iterator>::value_type
+            typename = typename std::iterator_traits<iterator_type_t<Range>>::value_type
         >
         struct element_point;
 
@@ -524,7 +530,7 @@ namespace geo
 
     // centroid returns the centroid of points in given range. Behavior is
     // undefined if the range is empty.
-    template<typename Range, typename Point = detail::element_point_t<Range>>
+    template<typename Range, typename Point = detail::element_point_t<Range const&>>
     Point centroid(Range const& points)
     {
         using scalar_type = typename Point::scalar_type;
