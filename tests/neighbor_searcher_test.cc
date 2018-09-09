@@ -3,9 +3,9 @@
 // file LICENSE.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include "catch.hpp"
-#include "../include/geo.hpp"
+#include "../plugin/neighbor_searcher.hpp"
 
 
-TEST_CASE("vector")
+TEST_CASE("neighbor_searcher - ")
 {
 }
